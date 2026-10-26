@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Sora", sans-serif;
+  --font-body: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: #060913;
+  color: #e8eefc;
+  overflow-x: hidden;
+}
+
+.font-display { font-family: var(--font-display); }
+.font-mono2 { font-family: var(--font-mono); }
+
+::selection { background: #ffd43b; color: #0b1020; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: #0b1020; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, #3776ab, #ffd43b); border-radius: 99px; }
+
+@keyframes floaty { 0%,100% { transform: translateY(0) rotate(0deg);} 50% { transform: translateY(-12px) rotate(3deg);} }
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-8px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-5px)} 80%{transform:translateX(5px)} }
+@keyframes pop-in { 0%{transform:scale(0.6);opacity:0} 60%{transform:scale(1.08)} 100%{transform:scale(1);opacity:1} }
+@keyframes glow-pulse { 0%,100%{box-shadow:0 0 20px rgba(255,212,59,0.35)} 50%{box-shadow:0 0 44px rgba(255,212,59,0.6)} }
+@keyframes xp-fill { from{width:0} }
+@keyframes enemy-hit { 0%{transform:translateX(0) rotate(0)} 25%{transform:translateX(-10px) rotate(-8deg)} 50%{transform:translateX(8px) rotate(6deg)} 75%{transform:translateX(-4px)} 100%{transform:translateX(0)} }
+@keyframes enemy-die { 0%{transform:scale(1);opacity:1;filter:none} 100%{transform:scale(1.6) rotate(20deg);opacity:0;filter:blur(6px)} }
+@keyframes confetti-fall { 0%{transform:translateY(-10px) rotate(0);opacity:1} 100%{transform:translateY(320px) rotate(540deg);opacity:0} }
+@keyframes grid-drift { from{background-position:0 0} to{background-position:0 80px} }
+@keyframes torch { 0%,100%{opacity:0.7} 50%{opacity:1} }
+
+.anim-shake { animation: shake 0.45s ease; }
+.anim-pop { animation: pop-in 0.4s cubic-bezier(0.2,1.4,0.4,1) both; }
+.anim-enemy-hit { animation: enemy-hit 0.45s ease; }
+.anim-enemy-die { animation: enemy-die 0.7s ease forwards; }
+.anim-glow { animation: glow-pulse 2.2s ease-in-out infinite; }
+
+.bg-dungeon {
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% -5%, rgba(55,118,171,0.25), transparent),
+    radial-gradient(ellipse 40% 30% at 85% 20%, rgba(255,212,59,0.08), transparent),
+    linear-gradient(rgba(120,160,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(120,160,255,0.05) 1px, transparent 1px);
+  background-size: auto, auto, 40px 40px, 40px 40px;
+  animation: grid-drift 14s linear infinite;
+}
+
+.glass { background: rgba(255,255,255,0.045); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.09); }
+.panel { background: linear-gradient(180deg, rgba(20,28,52,0.9), rgba(10,14,30,0.95)); border: 1px solid rgba(120,160,255,0.14); }
+
+.code-editor-wrap { position: relative; }
+.code-editor-wrap textarea, .code-editor-wrap pre {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  line-height: 1.65;
+  tab-size: 4;
+  white-space: pre;
+}
+.code-editor-wrap textarea {
+  color: transparent;
+  caret-color: #ffd43b;
+  background: transparent;
+  resize: none;
+}
+.code-editor-wrap textarea::selection { background: rgba(255,212,59,0.25); color: transparent; }
+.code-editor-wrap pre { pointer-events: none; }
+.code-editor-wrap pre code { background: transparent !important; }
+
+/* python syntax colors */
+.tok-kw { color: #ff7edb; font-weight: 600; }
+.tok-str { color: #9ece6a; }
+.tok-num { color: #ff9e64; }
+.tok-com { color: #5b6b8c; font-style: italic; }
+.tok-fn { color: #7aa2f7; }
+.tok-dec { color: #bb9af7; }
+.tok-self { color: #e0af68; }
+.tok-op { color: #89ddff; }
+.tok-plain { color: #dfe7ff; }
+
+.hp-bar { transition: width 0.6s cubic-bezier(0.2,0.8,0.3,1); }
+.xp-bar { transition: width 0.8s cubic-bezier(0.2,0.8,0.3,1); }
+
+.path-line {
+  background-image: linear-gradient(180deg, #ffd43b 55%, transparent 45%);
+  background-size: 4px 18px;
+  background-repeat: repeat-y;
+}
